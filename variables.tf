@@ -101,6 +101,12 @@ variable "docker_machine_instance_type" {
   default     = "m5.large"
 }
 
+
+variable "user_data_etc_hosts" {
+  description = "Pre install hosts"
+  type        = list(string)
+  default     = []
+}
 variable "docker_machine_spot_price_bid" {
   description = "Spot price bid. The maximum price willing to pay. By default the price is limited by the current on demand price for the instance type chosen."
   type        = string
