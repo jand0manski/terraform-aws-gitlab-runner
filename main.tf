@@ -38,6 +38,7 @@ locals {
   template_user_data = templatefile("${path.module}/template/user-data.tftpl",
     {
       eip                 = var.enable_eip ? local.template_eip : ""
+      user_data_etc_hosts = var.user_data_etc_hosts
       logging             = var.enable_cloudwatch_logging ? local.logging_user_data : ""
       gitlab_runner       = local.template_gitlab_runner
       user_data_trace_log = var.enable_runner_user_data_trace_log
