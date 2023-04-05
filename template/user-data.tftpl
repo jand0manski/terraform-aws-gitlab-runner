@@ -8,6 +8,9 @@ fi
 # Add current hostname to hosts file
 tee /etc/hosts <<EOL
 127.0.0.1   localhost localhost.localdomain $(hostname)
+%{ for host in user_data_etc_hosts ~}
+ ${host}
+%{ endfor ~}
 EOL
 
 token=$(curl -f -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 300")
