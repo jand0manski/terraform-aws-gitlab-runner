@@ -38,6 +38,14 @@ resource "aws_s3_bucket" "build_cache" {
   force_destroy = true
 }
 
+resource "aws_s3_bucket_ownership_controls" "example" {
+  bucket = aws_s3_bucket.build_cache.id
+
+  rule {
+	object_ownership = "BucketOwnerPreferred"
+  }
+}
+
 resource "aws_s3_bucket_acl" "build_cache_acl" {
   bucket = aws_s3_bucket.build_cache.id
 
