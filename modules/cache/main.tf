@@ -38,7 +38,7 @@ resource "aws_s3_bucket" "build_cache" {
   force_destroy = true
 }
 
-resource "aws_s3_bucket_ownership_controls" "example" {
+resource "aws_s3_bucket_ownership_controls" "this" {
   bucket = aws_s3_bucket.build_cache.id
 
   rule {
@@ -48,8 +48,9 @@ resource "aws_s3_bucket_ownership_controls" "example" {
 
 resource "aws_s3_bucket_acl" "build_cache_acl" {
   bucket = aws_s3_bucket.build_cache.id
-
+	
   acl = "private"
+  depends_on[aws_s3_bucket_ownership_controls.this]
 }
 
 resource "aws_s3_bucket_versioning" "build_cache_versioning" {
